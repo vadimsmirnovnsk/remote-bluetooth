@@ -17,8 +17,8 @@ class ViewController: UIViewController {
 
 	private func configureControls() {
 		zoomStepper.minimumValue = 1.0
-		zoomStepper.maximumValue = 10.0
-		zoomStepper.stepValue = 0.2
+		zoomStepper.maximumValue = 5.0
+		zoomStepper.stepValue = 0.05
 		zoomStepper.value = 1.0
 
 		whiteBalanceSlider.minimumValue = 3000.0

@@ -41,6 +41,7 @@ extension BluetoothPeripheral { // Send Data
 
 	private func privateSend(data nsdataToSend: Data) {
 		sendDataIndex = 0
+
 		let dataToSend = nsdataToSend as NSData
 		if sendingEOM {
 			// send it
@@ -133,6 +134,8 @@ extension BluetoothPeripheral { // Send Data
 					sendingEOM = false
 					print("Sent: EOM")
 				}
+
+				sendingEOM = true
 
 				return
 			}
