@@ -17,9 +17,12 @@
 		30B038011DCDD3AD0055A9BB /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B038001DCDD3AD0055A9BB /* Definitions.swift */; };
 		30B038031DCDD8490055A9BB /* RemoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B038021DCDD8490055A9BB /* RemoteController.swift */; };
 		30B038051DCDDAF30055A9BB /* RemoteControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B038041DCDDAF30055A9BB /* RemoteControls.swift */; };
+		516DD78A9A530864606A095B /* Pods_Remote_Bluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F168BD9813366B5D8734AF1 /* Pods_Remote_Bluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		025AEC511B67E1EE0135F509 /* Pods-Remote-Bluetooth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remote-Bluetooth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remote-Bluetooth/Pods-Remote-Bluetooth.debug.xcconfig"; sourceTree = "<group>"; };
+		0F168BD9813366B5D8734AF1 /* Pods_Remote_Bluetooth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Remote_Bluetooth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B037E61DCDD2BA0055A9BB /* Remote-Bluetooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Remote-Bluetooth.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30B037E91DCDD2BA0055A9BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30B037EB1DCDD2BA0055A9BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		30B038001DCDD3AD0055A9BB /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Definitions.swift; path = ../Definitions.swift; sourceTree = "<group>"; };
 		30B038021DCDD8490055A9BB /* RemoteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteController.swift; sourceTree = "<group>"; };
 		30B038041DCDDAF30055A9BB /* RemoteControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteControls.swift; sourceTree = "<group>"; };
+		3BC57056992398B2BCBBAE80 /* Pods-Remote-Bluetooth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remote-Bluetooth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remote-Bluetooth/Pods-Remote-Bluetooth.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30B037FF1DCDD3950055A9BB /* CoreBluetooth.framework in Frameworks */,
+				516DD78A9A530864606A095B /* Pods_Remote_Bluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +57,7 @@
 				30B037E81DCDD2BA0055A9BB /* Remote-Bluetooth */,
 				30B037E71DCDD2BA0055A9BB /* Products */,
 				30B037FD1DCDD3950055A9BB /* Frameworks */,
+				E6D2C317C804D0D5AF6AEB55 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,8 +90,18 @@
 			isa = PBXGroup;
 			children = (
 				30B037FE1DCDD3950055A9BB /* CoreBluetooth.framework */,
+				0F168BD9813366B5D8734AF1 /* Pods_Remote_Bluetooth.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6D2C317C804D0D5AF6AEB55 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				025AEC511B67E1EE0135F509 /* Pods-Remote-Bluetooth.debug.xcconfig */,
+				3BC57056992398B2BCBBAE80 /* Pods-Remote-Bluetooth.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,9 +111,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30B037F81DCDD2BA0055A9BB /* Build configuration list for PBXNativeTarget "Remote-Bluetooth" */;
 			buildPhases = (
+				FE7704894752B6D7BEAB059B /* [CP] Check Pods Manifest.lock */,
 				30B037E21DCDD2BA0055A9BB /* Sources */,
 				30B037E31DCDD2BA0055A9BB /* Frameworks */,
 				30B037E41DCDD2BA0055A9BB /* Resources */,
+				9B318787EBC7AD31F5DC166A /* [CP] Embed Pods Frameworks */,
+				CA4D8594587B55D17CC45FBA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -155,6 +174,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9B318787EBC7AD31F5DC166A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Remote-Bluetooth/Pods-Remote-Bluetooth-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA4D8594587B55D17CC45FBA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Remote-Bluetooth/Pods-Remote-Bluetooth-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE7704894752B6D7BEAB059B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		30B037E21DCDD2BA0055A9BB /* Sources */ = {
@@ -287,6 +354,7 @@
 		};
 		30B037F91DCDD2BA0055A9BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 025AEC511B67E1EE0135F509 /* Pods-Remote-Bluetooth.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -301,6 +369,7 @@
 		};
 		30B037FA1DCDD2BA0055A9BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BC57056992398B2BCBBAE80 /* Pods-Remote-Bluetooth.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

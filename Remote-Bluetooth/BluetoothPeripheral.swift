@@ -1,13 +1,15 @@
 import CoreBluetooth
+import Synchronized
 
 class BluetoothPeripheral: NSObject {
 
 	fileprivate var peripheralManager: CBPeripheralManager?
 	fileprivate var transferCharacteristic: CBMutableCharacteristic?
 
-	fileprivate let serialQueue = DispatchQueue(label: "bluetoothQueue")
+	fileprivate var dataArray = [Data]()
 
 	// First up, check if we're meant to be sending an EOM
+	fileprivate var dataToSend: Data?
 	fileprivate var sendingEOM = false
 	fileprivate var sendDataIndex = 0
 
@@ -32,63 +34,38 @@ class BluetoothPeripheral: NSObject {
 
 extension BluetoothPeripheral { // Send Data
 
-	/** Sends the next amount of data to the connected central */
 	func send(_ data: Data) {
-		serialQueue.async { [weak self] in
-			self?.privateSend(data: data)
-		}
+		synchronized(object: self, closure: {
+			self.dataArray.append(data)
+			sendDataIndex = 0
+			dataToSend = data
+		})
+
+		privateSend()
 	}
 
-	private func privateSend(data nsdataToSend: Data) {
-		sendDataIndex = 0
-
-		let dataToSend = nsdataToSend as NSData
-		if sendingEOM {
-			// send it
-			let didSend = peripheralManager?.updateValue(
-				"EOM".data(using: String.Encoding.utf8)!,
-				for: transferCharacteristic!,
-				onSubscribedCentrals: nil
-			)
-
-			// Did it send?
-			if (didSend == true) {
-
-				// It did, so mark it as sent
-				sendingEOM = false
-
-				print("Sent: EOM")
-			}
-
-			// It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
-			return
-		}
+	/** Sends the next amount of data to the connected central */
+	fileprivate func privateSend() {
+		guard !sendingEOM else { return sendEOM() }
 
 		// We're not sending an EOM, so we're sending data
 
-		// Is there any left to send?
-		guard sendDataIndex < dataToSend.length else {
-			// No data left.  Do nothing
-			return
-		}
+		// Is there any left to send? // No data left.  Do nothing
+		guard let dataToSend = dataToSend else { return }
+		guard sendDataIndex < dataToSend.count else { return }
 
 		// There's data left, so send until the callback fails, or we're done.
 		var didSend = true
 
+		// Send with chunks
 		while didSend {
-			// Make the next chunk
+			// Work out how big it should be // Can't be longer than 20 bytes
+			let amountToSend = min(dataToSend.count - sendDataIndex, NOTIFY_MTU)
 
-			// Work out how big it should be
-			var amountToSend = dataToSend.length - sendDataIndex
-
-			// Can't be longer than 20 bytes
-			if (amountToSend > NOTIFY_MTU) {
-				amountToSend = NOTIFY_MTU;
-			}
-
+			let nsdataToSend = dataToSend as NSData
 			// Copy out the data we want
 			let chunk = NSData(
-				bytes: dataToSend.bytes + sendDataIndex,
+				bytes: nsdataToSend.bytes + sendDataIndex,
 				length: amountToSend
 			)
 
@@ -100,46 +77,51 @@ extension BluetoothPeripheral { // Send Data
 			)
 
 			// If it didn't work, drop out and wait for the callback
-			if (!didSend) {
-				return
-			}
+			if (!didSend) { return }
 
 			let stringFromData = NSString(
 				data: chunk as Data,
 				encoding: String.Encoding.utf8.rawValue
-				)!
-
+			)!
 			print("Sent: \(stringFromData)")
 
 			// It did send, so update our index
 			sendDataIndex += amountToSend;
 
 			// Was it the last one?
-			if (sendDataIndex >= dataToSend.length) {
-
-				// It was - send an EOM
-
+			if (sendDataIndex >= dataToSend.count) {
 				// Set this so if the send fails, we'll send it next time
 				sendingEOM = true
+				sendEOM()
 
-				// Send it
-				let eomSent = peripheralManager!.updateValue(
-					"EOM".data(using: String.Encoding.utf8)!,
-					for: transferCharacteristic!,
-					onSubscribedCentrals: nil
-				)
+				synchronized(object: self, closure: {
+					self.dataToSend = self.dataArray.removeFirst()
+					sendDataIndex = 0
+				})
 
-				if (eomSent) {
-					// It sent, we're all done
-					sendingEOM = false
-					print("Sent: EOM")
-				}
-
-				sendingEOM = true
-
-				return
 			}
 		}
+	}
+
+	private func sendEOM() {
+		// send it
+		let didSend = peripheralManager?.updateValue(
+			"EOM".data(using: String.Encoding.utf8)!,
+			for: transferCharacteristic!,
+			onSubscribedCentrals: nil
+		)
+
+		// Did it send?
+		if (didSend == true) {
+
+			// It did, so mark it as sent
+			sendingEOM = false
+
+			print("Sent: EOM")
+		}
+
+		// It didn't send, so we'll exit and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendData again
+		return
 	}
 
 }
@@ -185,7 +167,7 @@ extension BluetoothPeripheral: CBPeripheralManagerDelegate {
 	}
 
 	func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-
+		print(">>> DID RECEIVE READ REQUESTS: \(request)")
 	}
 
 	func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
@@ -198,6 +180,8 @@ extension BluetoothPeripheral: CBPeripheralManagerDelegate {
 
 	func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
 		print(">>> READY FOR UPDATE SUBSCRIBERS \(peripheral)")
+
+		privateSend()
 	}
 
 }
