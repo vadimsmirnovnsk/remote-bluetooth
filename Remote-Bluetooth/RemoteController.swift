@@ -3,7 +3,7 @@ class RemoteController {
 	private let peripheral = BluetoothPeripheral()
 
 	init() {
-		peripheral.startAdvertising()
+//		peripheral.startAdvertising()
 	}
 
 	deinit {

@@ -131,7 +131,6 @@ extension BluetoothPeripheral: CBPeripheralManagerDelegate {
 	func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
 		print(">>> DID UPDATE STATE \(peripheral.state)")
 		guard peripheral.state == .poweredOn else { return }
-		print(">>> Peripheral powered on: \(peripheral)")
 
 		// Start with the CBMutableCharacteristic
 		transferCharacteristic = CBMutableCharacteristic(
@@ -152,6 +151,8 @@ extension BluetoothPeripheral: CBPeripheralManagerDelegate {
 
 		// And add it to the peripheral manager
 		peripheralManager?.add(transferService)
+		
+		print(">>> Peripheral powered on: \(peripheral)")
 	}
 
 	func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
@@ -175,6 +176,8 @@ extension BluetoothPeripheral: CBPeripheralManagerDelegate {
 	}
 
 	func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
+
+		self.startAdvertising()
 		print(">>> DID ADD SERVICE: \(service) with error: \(error)")
 	}
 
