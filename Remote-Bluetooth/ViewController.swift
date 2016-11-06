@@ -26,6 +26,10 @@ class ViewController: UIViewController {
 		whiteBalanceSlider.value = 5400.0
 	}
 
+	@IBAction func toggleCamera(_ sender: UIButton) {
+		remoteController.toggleCamera()
+	}
+
 	@IBAction func didChangeZoomValue(_ sender: UIStepper) {
 		print(sender.value)
 		remoteController.setZoom(withLevel: sender.value)

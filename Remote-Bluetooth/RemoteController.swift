@@ -15,6 +15,11 @@ class RemoteController {
 		send(eventString)
 	}
 
+	func toggleCamera() {
+		let eventString = RemoteControls.toggleCamera
+		send(eventString)
+	}
+
 	func takeVideoStart() {
 		let eventString = RemoteControls.takeVideoId + RemoteControls.divider + RemoteEvents.didTap
 		send(eventString)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -80,6 +80,19 @@
                                     <action selector="didTapRecordStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JpT-xJ-bGv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mb-aU-KD1">
+                                <rect key="frame" x="241" y="284" width="118" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="MTF-T3-5xS"/>
+                                    <constraint firstAttribute="width" constant="118" id="XqN-6A-UL6"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="118" id="b0f-g8-Tpy"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="mli-MH-JbH"/>
+                                </constraints>
+                                <state key="normal" title="Toggle camera"/>
+                                <connections>
+                                    <action selector="toggleCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ai-HF-Zfi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -88,6 +101,7 @@
                             <constraint firstItem="JHR-SG-jY6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="21h-wZ-EIo"/>
                             <constraint firstItem="B2q-uL-Xrh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="146" id="2db-MW-Ldv"/>
                             <constraint firstItem="WID-2p-8nS" firstAttribute="leading" secondItem="S03-RA-4Ma" secondAttribute="leading" id="5PG-ao-meq"/>
+                            <constraint firstItem="3Mb-aU-KD1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8oM-kX-G2V"/>
                             <constraint firstItem="JTJ-9I-nmi" firstAttribute="top" secondItem="0qb-YP-ap4" secondAttribute="bottom" constant="35" id="E29-Rd-FXa"/>
                             <constraint firstItem="WID-2p-8nS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H0P-Nx-eQi"/>
                             <constraint firstItem="B2q-uL-Xrh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="IGE-xt-nK1"/>
@@ -100,6 +114,7 @@
                             <constraint firstItem="cJw-cr-nwr" firstAttribute="top" secondItem="S03-RA-4Ma" secondAttribute="bottom" constant="53" id="YpS-vA-jo8"/>
                             <constraint firstItem="DXX-m5-khm" firstAttribute="top" secondItem="B2q-uL-Xrh" secondAttribute="bottom" constant="53" id="gp3-Cp-XLz"/>
                             <constraint firstItem="DXX-m5-khm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jbH-Xh-LGt"/>
+                            <constraint firstItem="3Mb-aU-KD1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="264" id="zRS-hZ-scA"/>
                         </constraints>
                     </view>
                     <connections>
